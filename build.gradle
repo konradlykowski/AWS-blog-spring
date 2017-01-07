@@ -1,0 +1,24 @@
+group 'com.lykowski.examples'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'war'
+
+
+
+war {
+    baseName = 'myapp'
+    version = '0.5.0'
+}
+
+repositories {
+    jcenter()
+    maven { url "http://repo.spring.io/libs-snapshot" }
+}
+
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:1.5.3.RELEASE")
+    compile(group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb', version: '1.11.156')
+
+
+}
