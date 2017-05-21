@@ -112,6 +112,7 @@ app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, postId) 
                     "";
 
   $scope.comments = [{name:"Konrad",date:"'24.10.1222'",text:"tresc komentarza to jest"},{name:"Konrad",date:"24.10.1222",text:"tresc komentarza to jest"},{name:"Konrad",date:"24.10.1222",text:"tresc komentarza to jest"},{name:"Konrad",date:"24.10.1222",text:"tresc komentarza to jest"}];
+  $scope.tags = [{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"},{name:"tag1",link:"www.tag1.com"}]
   $scope.addComment = function() {
     $scope.comments.push({name:$scope.name,text:$scope.text,email:$scope.email, date: new Date().toLocaleString()});
   }
