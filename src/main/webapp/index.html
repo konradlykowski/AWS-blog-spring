@@ -45,8 +45,10 @@
         <div class="modal-footer">
             <a data-toggle="modal" ui-sref="posts()" class="button"><span></span>Zamknij</a>
         </div>
-
-        <div class="container">
+        <ul class="tag-bar">
+            <li ng-repeat="tag in tags"><a href="{{tag.link}}" rel="tag">{{tag.name}}</a></li>
+        </ul>
+        <div class="modal-post-text">
             <hr/>
             <div>
                 <h4>Dodaj komentarz</h4>
