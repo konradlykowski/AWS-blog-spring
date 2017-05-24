@@ -39,6 +39,30 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
           }]
          })
+        .state('about', {
+           url: '^/about',
+               templateUrl: 'main.html',
+               controller: 'MainController',
+             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                   var modal = $uibModal.open({
+                         animation: false,
+                         templateUrl: 'about.html',
+                         controller: 'AboutController',
+                         size: 'lg',
+                         resolve: {
+                           postId: function() {
+                             return $stateParams.postId;
+                           }
+                         }
+                       });
+                       modal.result.finally(function() {
+                                $state.go('^');
+                              });
+               }],
+                   onExit: function($uibModalStack){
+                       $uibModalStack.dismissAll();
+                   }
+          })
         .state('posts.show', {
         url: '^/posts/:postId',
            templateUrl: 'main.html',
@@ -46,8 +70,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
             var modal = $uibModal.open({
                   animation: false,
-                  templateUrl: 'modal.html',
-                  controller: 'ModalInstanceCtrl',
+                  templateUrl: 'show-post.html',
+                  controller: 'ShowPostController',
                   size: 'lg',
                   resolve: {
                     postId: function() {
@@ -89,7 +113,21 @@ app.controller('CarouselController', function ($scope) {
     }
 });
 
-app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, postId) {
+app.controller('AboutController', function($scope, $uibModalInstance, postId) {
+  $scope.content = "Hej! Jestem Marta!"+
+                    "Pochodzę z małej miejscowości. Mam za sobą studia i 4 letni epizod w korporacji. Jestem szczęśliwie zakochana. Mam bzika na punkcie podróży, zdrowego stylu życia… i mody. Obecnie zastanawiam sie nad swoja przeszłością, wyciągam wnioski z poprzednich dokonań i szukam inspiracji na przyszłość."+
+                    "Od najmłodszych lat uwielbiałam tworzyć i wymyślać ubrania. Początkowo były to ubranka dla lalek, wówczas pierwszy raz siedziałam za “sterami” starej maszyny do szycia. Później wymyślałam ubrania dla siebie i szyła mi je mama. Te doświadczenia sprawiły, że coraz bardziej zarażałam się pasją tworzenia własnych ubrań, eksperymentowania z tkaninami, dodatkami oraz formą. Uwielbiam wyprawy do malutkiego sklepiku z materiałami w moim rodzinnym miasteczku. Za każdym razem gdy zobaczę tkaninę, która mi się spodoba, dokładnie wiem co chciałabym z niej uszyć. Zamierzam sama przerabiać, projektować i szyć nowe ubrania. Chciałabym to wszystko połączyć z podróżami, z których zamierzam czerpać inspiracje do nowych projektów, a także tworzyć ubrania z myślą o przyszłych podróżach."+
+                    "Moja ostateczna decyzja o pisaniu bloga zapadła właśnie podczas jednej z takich podróży, była nią wyprawa do Azji. Spacerując po pięknym i magicznym Kioto, będąc na końcu świata poczułam, że warto próbować spełniać swoje marzenia. Jeśli nie zaryzykujesz, nie poświęcisz czasu i nie dasz czegoś od siebie to pewnie się nie uda. Ja zamierzam dać z siebie wszystko."+
+                    "Mam masę pomysłów, chęci i energii, aby je realizować."+
+                    "Jeżeli jesteś zainteresowana/y moimi poczynaniami, zapraszam na bloga.";
+
+  $scope.cancel = function() {
+    $uibModalInstance.dismiss('cancel');
+  };
+});
+
+
+app.controller('ShowPostController', function($scope, $uibModalInstance, postId) {
   $scope.postId = postId+'zecsc';
   $scope.content = "<div class=\"modal-post-text\">Japonia to niezwykły kraj z bogatym dobytkiem kulturowym. Wszystko tam było dla mnie niezwykle: ludzie, obyczaje, stroje, język oraz jedzenie. Pomimo pozornego tłoku na ulicach, dworcach oraz w metrze, ludzie są “dziwnie” spokojni. Nigdy dotychczas się z czymś takim nie spotkałam. Pomyślałam, że jako osoba zbzikowana na punkcie mody i kultury ubioru podzielę się z Tobą moimi spostrzeżeniami na ten temat z Japonii. <p/>"+
                     "<br/><span class=\"modal-title\">JAPOŃSKA ELEGANCJA NA NAJWYŻSZYM POZIOMIE</span><br/>"+
