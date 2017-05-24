@@ -41,11 +41,11 @@
         <div style="text-align: center" class="modal-post-text center-block">
             W razie pytań zapraszam do kontaktu na email: <a href="mailto:martha.nowicka@outlook.com"
                                                              target="_blank">martha.nowicka@outlook.com</a></div>
-        <img ng-src="img/about/marta.JPG" class="img-responsive center-block" style="width:35%;">
-        <div class="modal-post-text">
+        <img ng-src="img/about/marta.JPG" class="img-responsive center-block" style="width:25%;">
+        <div class="container modal-post-text">
             <div ng-bind-html="content"></div>
         </div>
-        <div class="modal-footer">
+        <div class="container modal-footer">
             <a data-toggle="modal" ui-sref="posts()" class="button"><span></span>Zamknij</a>
         </div>
     </div>
@@ -66,16 +66,17 @@
         <div class="modal-title">CO NASZĄ JAPOŃCZYCY I PRAWDZIWI GAJDZINI?
             <img ng-src="img/IMG_9508.JPG" style="width:100%;">
         </div>
-
-        <div ng-bind-html="content"></div>
-        <ul class="tag-bar">
+        <div class="container modal-post-text">
+            <div ng-bind-html="content"></div>
+        </div>
+        <ul class="container tag-bar">
             <li ng-repeat="tag in tags"><a href="{{tag.link}}" rel="tag">{{tag.name}}</a></li>
         </ul>
-        <div class="modal-footer">
+        <div class="container modal-footer">
             <a data-toggle="modal" ui-sref="posts()" class="button"><span></span>Zamknij</a>
         </div>
 
-        <div class="modal-post-text">
+        <div class="container modal-post-text">
             <hr/>
             <div>
                 <h4>Dodaj komentarz</h4>
