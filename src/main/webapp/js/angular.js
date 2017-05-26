@@ -96,6 +96,21 @@ app.controller('MainController', function($location, $scope, $stateParams) {
     for(i=0;i<3;i++) {
         $scope.posts.push({id:'marta-w-porto.html', title:'Marta w Porto',category:'podroze',date:Math.random()+'th May 2017', description:'Marta przyjechala do Porto zobaczyc co slychac', content:'CONTENT', commentsCount:'12', tags: 'kokos;kokos2', image:'img/image1.JPG', location: 'Zurich'})
     }
+
+        $scope.totalItems = 164;
+        $scope.currentPage = 4;
+
+        $scope.setPage = function (pageNo) {
+          $scope.currentPage = pageNo;
+        };
+
+        $scope.pageChanged = function() {
+          console.log('Page changed to: ' + $scope.currentPage);
+        };
+
+        $scope.maxSize = 3;
+        $scope.bigTotalItems = 160;
+        $scope.bigCurrentPage = 3;
 });
 
 app.controller('CarouselController', function ($scope) {
@@ -114,18 +129,14 @@ app.controller('CarouselController', function ($scope) {
 });
 
 app.controller('AboutController', function($scope, $uibModalInstance, postId) {
-  $scope.content = "Hej! Jestem Marta!"+
-                    "Pochodzę z małej miejscowości. Mam za sobą studia i 4 letni epizod w korporacji. Jestem szczęśliwie zakochana. Mam bzika na punkcie podróży, zdrowego stylu życia… i mody. Obecnie zastanawiam sie nad swoja przeszłością, wyciągam wnioski z poprzednich dokonań i szukam inspiracji na przyszłość."+
-                    "Od najmłodszych lat uwielbiałam tworzyć i wymyślać ubrania. Początkowo były to ubranka dla lalek, wówczas pierwszy raz siedziałam za “sterami” starej maszyny do szycia. Później wymyślałam ubrania dla siebie i szyła mi je mama. Te doświadczenia sprawiły, że coraz bardziej zarażałam się pasją tworzenia własnych ubrań, eksperymentowania z tkaninami, dodatkami oraz formą. Uwielbiam wyprawy do malutkiego sklepiku z materiałami w moim rodzinnym miasteczku. Za każdym razem gdy zobaczę tkaninę, która mi się spodoba, dokładnie wiem co chciałabym z niej uszyć. Zamierzam sama przerabiać, projektować i szyć nowe ubrania. Chciałabym to wszystko połączyć z podróżami, z których zamierzam czerpać inspiracje do nowych projektów, a także tworzyć ubrania z myślą o przyszłych podróżach."+
-                    "Moja ostateczna decyzja o pisaniu bloga zapadła właśnie podczas jednej z takich podróży, była nią wyprawa do Azji. Spacerując po pięknym i magicznym Kioto, będąc na końcu świata poczułam, że warto próbować spełniać swoje marzenia. Jeśli nie zaryzykujesz, nie poświęcisz czasu i nie dasz czegoś od siebie to pewnie się nie uda. Ja zamierzam dać z siebie wszystko."+
-                    "Mam masę pomysłów, chęci i energii, aby je realizować."+
-                    "Jeżeli jesteś zainteresowana/y moimi poczynaniami, zapraszam na bloga.";
+  $scope.content = "Mam za sobą studia i 4 letni epizod w korporacji. <br/>Jestem szczęśliwie zakochana. <br/>"+
+                    "Mam bzika na punkcie podróży, zdrowego stylu życia… i mody. <br/>"+
+                    "Obecnie zastanawiam sie nad swoja przeszłością, wyciągam wnioski z poprzednich dokonań i szukam inspiracji na przyszłość. <br/>Od najmłodszych lat uwielbiałam tworzyć i wymyślać ubrania. Początkowo były to ubranka dla lalek, wówczas pierwszy raz siedziałam za “sterami” starej maszyny do szycia. Później wymyślałam ubrania dla siebie i szyła mi je mama. Te doświadczenia sprawiły, że coraz bardziej zarażałam się pasją tworzenia własnych ubrań, eksperymentowania z tkaninami, dodatkami oraz formą. Uwielbiam wyprawy do malutkiego sklepiku z materiałami w moim rodzinnym miasteczku. Za każdym razem gdy zobaczę tkaninę, która mi się spodoba, dokładnie wiem co chciałabym z niej uszyć. <br/>Zamierzam sama przerabiać, projektować i szyć nowe ubrania. <br/>Chciałabym to wszystko połączyć z podróżami, z których zamierzam czerpać inspiracje do nowych projektów, a także tworzyć ubrania z myślą o przyszłych podróżach. <br/>Moja ostateczna decyzja o pisaniu bloga zapadła właśnie podczas jednej z takich podróży, była nią wyprawa do Azji. Spacerując po pięknym i magicznym Kioto, będąc na końcu świata poczułam, że warto próbować spełniać swoje marzenia. <br/>Jeśli nie zaryzykujesz, nie poświęcisz czasu i nie dasz czegoś od siebie to pewnie się nie uda. Ja zamierzam dać z siebie wszystko. <br/>Mam masę pomysłów, chęci i energii, aby je realizować. <br/> <br/>Jeżeli jesteś zainteresowana/y moimi poczynaniami, zapraszam na bloga.";
 
   $scope.cancel = function() {
     $uibModalInstance.dismiss('cancel');
   };
 });
-
 
 app.controller('ShowPostController', function($scope, $uibModalInstance, postId) {
   $scope.postId = postId+'zecsc';
