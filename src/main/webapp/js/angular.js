@@ -96,21 +96,15 @@ app.controller('MainController', function($location, $scope, $stateParams) {
     for(i=0;i<3;i++) {
         $scope.posts.push({id:'marta-w-porto.html', title:'Marta w Porto',category:'podroze',date:Math.random()+'th May 2017', description:'Marta przyjechala do Porto zobaczyc co slychac', content:'CONTENT', commentsCount:'12', tags: 'kokos;kokos2', image:'img/image1.JPG', location: 'Zurich'})
     }
-
-        $scope.totalItems = 164;
-        $scope.currentPage = 4;
-
-        $scope.setPage = function (pageNo) {
-          $scope.currentPage = pageNo;
-        };
-
-        $scope.pageChanged = function() {
-          console.log('Page changed to: ' + $scope.currentPage);
-        };
-
-        $scope.maxSize = 3;
-        $scope.bigTotalItems = 160;
-        $scope.bigCurrentPage = 3;
+    $scope.setPage = function (pageNo) {
+      $scope.currentPage = pageNo;
+    };
+    $scope.pageChanged = function() {
+      console.log('Page changed to: ' + $scope.bigCurrentPage);
+    };
+    $scope.maxSize = 5;
+    $scope.bigTotalItems = 11;
+    $scope.bigCurrentPage = 3;
 });
 
 app.controller('CarouselController', function ($scope) {
@@ -129,14 +123,56 @@ app.controller('CarouselController', function ($scope) {
 });
 
 app.controller('AboutController', function($scope, $uibModalInstance, postId) {
-  $scope.content = "Mam za sobą studia i 4 letni epizod w korporacji. <br/>Jestem szczęśliwie zakochana. <br/>"+
-                    "Mam bzika na punkcie podróży, zdrowego stylu życia… i mody. <br/>"+
-                    "Obecnie zastanawiam sie nad swoja przeszłością, wyciągam wnioski z poprzednich dokonań i szukam inspiracji na przyszłość. <br/>Od najmłodszych lat uwielbiałam tworzyć i wymyślać ubrania. Początkowo były to ubranka dla lalek, wówczas pierwszy raz siedziałam za “sterami” starej maszyny do szycia. Później wymyślałam ubrania dla siebie i szyła mi je mama. Te doświadczenia sprawiły, że coraz bardziej zarażałam się pasją tworzenia własnych ubrań, eksperymentowania z tkaninami, dodatkami oraz formą. Uwielbiam wyprawy do malutkiego sklepiku z materiałami w moim rodzinnym miasteczku. Za każdym razem gdy zobaczę tkaninę, która mi się spodoba, dokładnie wiem co chciałabym z niej uszyć. <br/>Zamierzam sama przerabiać, projektować i szyć nowe ubrania. <br/>Chciałabym to wszystko połączyć z podróżami, z których zamierzam czerpać inspiracje do nowych projektów, a także tworzyć ubrania z myślą o przyszłych podróżach. <br/>Moja ostateczna decyzja o pisaniu bloga zapadła właśnie podczas jednej z takich podróży, była nią wyprawa do Azji. Spacerując po pięknym i magicznym Kioto, będąc na końcu świata poczułam, że warto próbować spełniać swoje marzenia. <br/>Jeśli nie zaryzykujesz, nie poświęcisz czasu i nie dasz czegoś od siebie to pewnie się nie uda. Ja zamierzam dać z siebie wszystko. <br/>Mam masę pomysłów, chęci i energii, aby je realizować. <br/> <br/>Jeżeli jesteś zainteresowana/y moimi poczynaniami, zapraszam na bloga.";
+  $scope.content = "<p>Mam za sobą studia i 4 letni epizod w korporacji. Jestem szczęśliwie zakochana."+
+                    "Mam bzika na punkcie podróży, zdrowego stylu życia… i mody."+
+                    "Obecnie zastanawiam sie nad swoja przeszłością, wyciągam wnioski z poprzednich dokonań i szukam inspiracji na przyszłość. </p>Od najmłodszych lat uwielbiałam tworzyć i wymyślać ubrania. Początkowo były to ubranka dla lalek, wówczas pierwszy raz siedziałam za “sterami” starej maszyny do szycia. Później wymyślałam ubrania dla siebie i szyła mi je mama. Te doświadczenia sprawiły, że coraz bardziej zarażałam się pasją tworzenia własnych ubrań, eksperymentowania z tkaninami, dodatkami oraz formą. Uwielbiam wyprawy do malutkiego sklepiku z materiałami w moim rodzinnym miasteczku. Za każdym razem gdy zobaczę tkaninę, która mi się spodoba, dokładnie wiem co chciałabym z niej uszyć. <br/>Zamierzam sama przerabiać, projektować i szyć nowe ubrania. <br/>Chciałabym to wszystko połączyć z podróżami, z których zamierzam czerpać inspiracje do nowych projektów, a także tworzyć ubrania z myślą o przyszłych podróżach. <br/>Moja ostateczna decyzja o pisaniu bloga zapadła właśnie podczas jednej z takich podróży, była nią wyprawa do Azji. Spacerując po pięknym i magicznym Kioto, będąc na końcu świata poczułam, że warto próbować spełniać swoje marzenia. <br/>Jeśli nie zaryzykujesz, nie poświęcisz czasu i nie dasz czegoś od siebie to pewnie się nie uda. Ja zamierzam dać z siebie wszystko. <br/>Mam masę pomysłów, chęci i energii, aby je realizować. <br/> <br/>Jeżeli jesteś zainteresowana/y moimi poczynaniami, zapraszam na bloga.";
 
   $scope.cancel = function() {
     $uibModalInstance.dismiss('cancel');
   };
 });
+
+ app.factory('InstagramAPI', ['$http','$sce', function($http,$sce) {
+    return {
+      fetchPhotos : function(callback) {
+         var client_id = '64a12cb0db7b41da8cd2a8736770c466';
+
+        //To get your user ID go to http://jelled.com/instagram/lookup-user-id and enter your Instagram user name to get your user ID
+        var user_id = '2191041937';
+
+        //https://www.instagram.com/oauth/authorize/?client_id=64a12cb0db7b41da8cd2a8736770c466&redirect_uri=http://127.0.0.1:8080/test&response_type=token
+         var access_token = '2191041937.1677ed0.09348d497db44b70b31554e3e2690d17';
+
+        var endpoint = 'https://api.instagram.com/v1/users/';
+        endpoint += user_id;
+        endpoint += '/media/recent/?';
+        endpoint += '?count=99';
+        endpoint += '&access_token=' + access_token;
+        var trustedUrl = $sce.trustAsResourceUrl(endpoint);
+
+        $http.jsonp(trustedUrl)
+            .then(function (data){
+                //success things go here
+                console.log(data);
+                callback(data.data.data);
+            }, function(data){
+                //error things go here
+                console.log(data);
+            });
+
+
+      }
+    }
+  }]);
+
+  app.controller('ShowImages', function($scope, InstagramAPI) {
+    $scope.layout = 'grid';
+    $scope.data = {};
+    $scope.pics = [];
+    InstagramAPI.fetchPhotos(function(data) {
+      $scope.pics = data;
+    });
+  });
 
 app.controller('ShowPostController', function($scope, $uibModalInstance, postId) {
   $scope.postId = postId+'zecsc';
