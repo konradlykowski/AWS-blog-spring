@@ -6,7 +6,7 @@
 body {
     overflow-x: hidden;
     font-family: 'Nunito', sans-serif;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em;
 }
 
 p {
@@ -48,6 +48,7 @@ section h3.section-subheading {
 @media (min-width: 768px) {
     section {
         padding: 50px 0;
+        padding-bottom: 0px;
     }
 }
 
@@ -105,20 +106,24 @@ body {
     margin-left: 10px;
     margin-top: -10px;
     font-size: 10px;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.4em;
 }
 
 #mainNav .container .navbar-nav .nav-item .nav-link {
     font-size: 90%;
     font-weight: 400;
-    padding: .75em 0;
     color: black;
     text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.padding-pictures {
+    padding-top: 50px;
 }
 
 @media (min-width: 992px) {
+
     #mainNav {
-        padding: 10px 0;
         -webkit-transition: padding .3s;
         -moz-transition: padding .3s;
         transition: padding .3s;
@@ -127,37 +132,28 @@ body {
     }
 
     #mainNav .navbar-brand {
-        font-size: 42px;
+        font-size: 45px;
         -webkit-transition: all .3s;
         -moz-transition: all .3s;
         transition: all .3s;
-        letter-spacing: 0.3em;
+        letter-spacing: 0.4em;
+        padding-top: 15px;
     }
 
     #mainNav .navbar-brand-by-marta {
         margin-left: 10px;
         margin-top: -19px;
+        margin-bottom: 20px;
         font-size: 12px;
         letter-spacing: 0.3em;
     }
 
     #mainNav .container .navbar-brand span {
-        font-size: 25px
-    }
-
-    .navbar-toggler-left-big-media {
-        position: absolute;
-        left: 1rem
-    }
-
-    .navbar-toggler-right-big-media {
-        position: absolute;
-        right: 1rem
+        font-size: 25px;
     }
 
     #mainNav .navbar-nav .nav-item .nav-link {
-        padding: 1.1em 1em !important;
-        margin-top: -30px;
+        margin-top: 15px;
     }
 
     #mainNav.navbar-shrink {
@@ -174,6 +170,15 @@ body {
 
     #mainNav.navbar-shrink .navbar-brand {
         font-size: 32px;
+        margin-bottom: -25px;
+    }
+
+    .padding-pictures {
+        padding-top: 120px;
+    }
+
+    #mainNav .nav-link-lower {
+        margin-top: 1rem !important;
     }
 }
 
@@ -863,10 +868,6 @@ fieldset[disabled] .btn-xl.focus {
 .card-img-top-250 {
     border-radius: 1px;
     overflow: hidden;
-}
-
-.padding-pictures {
-    padding-top: 60px;
 }
 
 h4.block-title::before {
