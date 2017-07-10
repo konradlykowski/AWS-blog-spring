@@ -118,68 +118,7 @@ body {
 }
 
 .padding-pictures {
-    padding-top: 50px;
-}
-
-@media (min-width: 992px) {
-
-    #mainNav {
-        -webkit-transition: padding .3s;
-        -moz-transition: padding .3s;
-        transition: padding .3s;
-        border: none;
-        background-color: transparent;
-    }
-
-    #mainNav .navbar-brand {
-        font-size: 45px;
-        -webkit-transition: all .3s;
-        -moz-transition: all .3s;
-        transition: all .3s;
-        letter-spacing: 0.4em;
-        padding-top: 15px;
-    }
-
-    #mainNav .navbar-brand-by-marta {
-        margin-left: 10px;
-        margin-top: -19px;
-        margin-bottom: 20px;
-        font-size: 12px;
-        letter-spacing: 0.3em;
-    }
-
-    #mainNav .container .navbar-brand span {
-        font-size: 25px;
-    }
-
-    #mainNav .navbar-nav .nav-item .nav-link {
-        margin-top: 15px;
-    }
-
-    #mainNav.navbar-shrink {
-        padding: 0;
-        background: rgba(255, 255, 255, 0.9);
-    }
-
-    #mainNav.navbar-shrink .navbar-brand-by-marta {
-        margin-top: -13px;
-        font-size: 12px;
-        font-size: 9px;
-
-    }
-
-    #mainNav.navbar-shrink .navbar-brand {
-        font-size: 32px;
-        margin-bottom: -25px;
-    }
-
-    .padding-pictures {
-        padding-top: 120px;
-    }
-
-    #mainNav .nav-link-lower {
-        margin-top: 1rem !important;
-    }
+    padding-top: 58px;
 }
 
 header.masthead {
@@ -218,6 +157,10 @@ header.masthead .intro-text .intro-heading {
     header.masthead .intro-text {
         padding-top: 300px;
         padding-bottom: 200px;
+    }
+
+    .padding-pictures {
+        padding-top: 8px;
     }
 
     header.masthead .intro-text .intro-lead-in {
@@ -310,12 +253,6 @@ header.masthead .intro-text .intro-heading {
 
 #portfolio * {
     z-index: 2;
-}
-
-@media (min-width: 767px) {
-    #portfolio .portfolio-item {
-        margin: 0 0 30px;
-    }
 }
 
 .portfolio-modal .modal-dialog {
@@ -448,8 +385,7 @@ header.masthead .intro-text .intro-heading {
 }
 
 .timeline > li .timeline-panel:before {
-    right: auto;
-    left: -15px;
+    margin: auto;
     border-right-width: 15px;
     border-left-width: 0;
 }
@@ -519,7 +455,68 @@ header.masthead .intro-text .intro-heading {
     margin-bottom: 0;
 }
 
+.elements-ordered {
+    display: flex;
+    flex-direction: column;
+}
+
+.elements-ordered > .element-upper {
+    order: 1 !important;
+}
+
+.elements-ordered > .element-lower {
+    order: 2 !important;
+}
+
+@media (min-width: 1200px) {
+    .timeline > li {
+        min-height: 170px;
+    }
+
+    .timeline > li .timeline-panel {
+        padding: 0 20px 20px 100px;
+    }
+
+    .timeline > li .timeline-image {
+        width: 170px;
+        height: 170px;
+        margin-left: -85px;
+    }
+
+    .timeline > li .timeline-image h4 {
+        margin-top: 40px;
+    }
+
+    .timeline > li.timeline-inverted > .timeline-panel {
+        padding: 0 100px 20px 20px;
+    }
+}
+
+@media (min-width: 34em) {
+
+    .col-sm-6 {
+        flex: initial !important;
+        max-width: initial !important;
+    }
+
+    .card-deck > .card {
+        width: 32%;
+        flex-wrap: wrap;
+        flex: initial;
+        border: none;
+    }
+
+    .card-deck .card:not(:first-child) {
+        margin: 2px;
+    }
+
+    .card-deck .card:not(:last-child) {
+        margin: 2px;
+    }
+}
+
 @media (min-width: 768px) {
+
     .timeline:before {
         left: 50%;
     }
@@ -554,9 +551,87 @@ header.masthead .intro-text .intro-heading {
         padding: 0 30px 20px 20px;
         text-align: left;
     }
+
 }
 
 @media (min-width: 992px) {
+
+    .elements-ordered {
+        display: flex !important;
+        flex-direction: initial !important;
+    }
+
+    .col-sm-6 {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+
+    .elements-ordered > .element-upper {
+        order: initial !important;
+    }
+
+    .elements-ordered > .element-lower {
+        order: initial !important;
+    }
+
+    #mainNav {
+        -webkit-transition: padding .3s;
+        -moz-transition: padding .3s;
+        transition: padding .3s;
+        border: none;
+        background-color: transparent;
+    }
+
+    #mainNav .navbar-brand {
+        font-size: 45px;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        transition: all .3s;
+        letter-spacing: 0.4em;
+        padding-top: 15px;
+    }
+
+    #mainNav .navbar-brand-by-marta {
+        margin-left: 10px;
+        margin-top: -19px;
+        margin-bottom: 20px;
+        font-size: 12px;
+        letter-spacing: 0.3em;
+    }
+
+    #mainNav .container .navbar-brand span {
+        font-size: 25px;
+    }
+
+    #mainNav .navbar-nav .nav-item .nav-link {
+        margin-top: 15px;
+    }
+
+    #mainNav.navbar-shrink {
+        padding: 0;
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    #mainNav.navbar-shrink .navbar-brand-by-marta {
+        margin-top: -13px;
+        font-size: 12px;
+        font-size: 9px;
+
+    }
+
+    #mainNav.navbar-shrink .navbar-brand {
+        font-size: 32px;
+        margin-bottom: -25px;
+    }
+
+    .padding-pictures {
+        padding-top: 120px !important;
+    }
+
+    #mainNav .nav-link-lower {
+        margin-top: 1rem !important;
+    }
+
     .timeline > li {
         min-height: 150px;
     }
@@ -579,30 +654,6 @@ header.masthead .intro-text .intro-heading {
 
     .timeline > li.timeline-inverted > .timeline-panel {
         padding: 0 20px 20px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .timeline > li {
-        min-height: 170px;
-    }
-
-    .timeline > li .timeline-panel {
-        padding: 0 20px 20px 100px;
-    }
-
-    .timeline > li .timeline-image {
-        width: 170px;
-        height: 170px;
-        margin-left: -85px;
-    }
-
-    .timeline > li .timeline-image h4 {
-        margin-top: 40px;
-    }
-
-    .timeline > li.timeline-inverted > .timeline-panel {
-        padding: 0 100px 20px 20px;
     }
 }
 
@@ -848,23 +899,6 @@ fieldset[disabled] .btn-xl.focus {
     background-color: white;
 }
 
-@media (min-width: 34em) {
-    .card-deck > .card {
-        width: 32%;
-        flex-wrap: wrap;
-        flex: initial;
-        border: none;
-    }
-
-    .card-deck .card:not(:first-child) {
-        margin: 2px;
-    }
-
-    .card-deck .card:not(:last-child) {
-        margin: 2px;
-    }
-}
-
 .card-img-top-250 {
     border-radius: 1px;
     overflow: hidden;
@@ -926,3 +960,4 @@ a.button span {
     border: 5px solid white;
     background-color: initial;
 }
+
