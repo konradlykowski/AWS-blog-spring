@@ -192,7 +192,14 @@ a:focus, a:hover {
     padding-top: 12px;
  }
 
-
+.tag-bar li {
+    display: inline-block;
+    margin-right: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 10px;
+}
 
 @media only screen and (min-width : 420px) {
     #mainNav .navbar-padding {
