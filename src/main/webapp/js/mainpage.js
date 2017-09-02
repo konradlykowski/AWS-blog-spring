@@ -13,7 +13,7 @@
         }
     });
 
-    $('body').Scrollspy({
+    $('body').scrollspy({
         target: '#mainNav',
         offset: 54
     });
@@ -23,7 +23,7 @@
     });
 
     $(window).scroll(function () {
-        if ($("#mainNav").offset().top > 20) {
+        if ($("#mainNav").offset().top > 30) {
             $("#mainNav").addClass("navbar-shrink");
         } else {
             $("#mainNav").removeClass("navbar-shrink");
