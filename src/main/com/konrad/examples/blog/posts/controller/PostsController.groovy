@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController
 @CompileStatic
 class PostsController {
 
-    static AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();
-    static DynamoDB dynamoDB = new DynamoDB(client);
+    static AmazonDynamoDB client// = AmazonDynamoDBClientBuilder.standard().build();
+    static DynamoDB dynamoDB// = new DynamoDB(client);
 
     @RequestMapping(value = "/v1/posts", method = RequestMethod.GET)
     String getCatalog() {
