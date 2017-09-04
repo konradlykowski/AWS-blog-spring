@@ -13,7 +13,7 @@
         }
     });
 
-    $('body').scrollspy({
+    $('body').Scrollspy({
         target: '#mainNav',
         offset: 54
     });

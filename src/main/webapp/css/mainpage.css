@@ -1,0 +1,234 @@
+body {
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+}
+#mainNav .container {
+    padding-bottom: 0px;
+}
+#mainNav {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+}
+#mainNav .navbar-title {
+    color:black;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 16px;
+    letter-spacing: 0.3em;
+    transition: all 0.6s ease;
+    font-weight: normal !important;
+}
+#mainNav .navbar-brand-by-marta {
+    margin-top: -7px;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    transition: all 0.6s ease;
+    font-weight: normal !important;
+}
+#mainNav.navbar-shrink {
+    padding-bottom: 1px;
+    padding-top: 1px;
+    transition: all 0.6s ease;
+}
+#bigPicturesCarousel .padding-pictures {
+    padding-top: 55px;
+}
+
+.post-desc .line {
+    background: transparent url('img/strike.jpg') center center no-repeat;
+}
+
+.post-desc span {
+    background-color: white;
+    color: #C0BCBC;
+    text-transform: uppercase;
+    padding: 0 13px;
+    letter-spacing: 0.24em;
+    font-size: 12px;
+}
+
+.post-desc .title {
+    font-size: 27px;
+    text-transform: uppercase;
+}
+
+.post-desc .description {
+    font-style: italic;
+}
+
+.col-sm-6 {
+    flex: initial !important;
+    max-width: initial !important;
+}
+
+.elements-ordered {
+    display: flex;
+    flex-direction: column;
+}
+
+.elements-ordered > .element-upper {
+    order: 1;
+}
+
+.elements-ordered > .element-lower {
+    order: 2;
+}
+
+a.button {
+    background-color: rgba(252, 239, 238, 2.67) !important;
+    display: inline-block;
+    border: 1px solid #e6e6e6;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 4px;
+    position: relative;
+    transition: all 200ms linear;
+    margin: 36px 0px;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+a.button span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 5px solid white;
+    background-color: initial;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+@media only screen and (min-width : 420px) {
+    #mainNav .navbar-title {
+        font-size: 23px;
+        letter-spacing: 0.4em;
+        transition: all 0.6s ease;
+    }
+    #mainNav .navbar-brand-by-marta {
+        margin-top: -12px;
+        font-size: 10px;
+        letter-spacing: 0.3em;
+    }
+    #bigPicturesCarousel .padding-pictures {
+        padding-top: 55px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #mainNav {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        transition: all 0.6s ease;
+    }
+   #mainNav .navbar-title {
+        font-size: 31px;
+        letter-spacing: 0.4em;
+        transition: all 0.6s ease;
+    }
+    #mainNav .navbar-brand-by-marta {
+        margin-top: -15px;
+        font-size: 12px;
+        letter-spacing: 0.3em;
+    }
+    #mainNav.navbar-shrink .navbar-brand-by-marta {
+        margin-bottom: 0px;
+        transition: all 0.6s ease;
+    }
+    #mainNav.navbar-shrink {
+        padding-bottom: 0px;
+        padding-top: 0px;
+        background: rgba(255, 255, 255, 0.9);
+        transition: all 0.6s ease;
+    }
+    #bigPicturesCarousel .padding-pictures {
+        padding-top: 72px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+
+    .elements-ordered {
+        display: flex;
+        flex-direction: initial;
+    }
+    .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .elements-ordered > .element-upper {
+        order: initial;
+    }
+    .elements-ordered > .element-lower {
+        order: initial;
+    }
+    #mainNav .container {
+        display: block;
+    }
+
+    #mainNav .navbar-title {
+        font-size: 45px;
+        letter-spacing: 0.4em;
+        transition: all 0.6s ease;
+    }
+    #mainNav .navbar-brand-by-marta {
+        margin-top: -19px;
+        margin-bottom: 20px;
+        font-size: 12px;
+        letter-spacing: 0.3em;
+    }
+    #mainNav .navbar-nav {
+        width:100%;
+    }
+    #mainNav .navbar-nav .nav-item-left{
+        text-align: left;
+    }
+    #mainNav .navbar-nav .nav-link {
+        color:black;
+    }
+    #mainNav .navbar-nav  > li {
+        width:100%;
+        text-align: center;
+        white-space: nowrap;
+    }
+    #mainNav.navbar-shrink {
+        padding: 0;
+        background: rgba(255, 255, 255, 0.9);
+    }
+    #mainNav.navbar-shrink .navbar-brand-by-marta {
+        margin-top: -13px;
+        font-size: 12px;
+        font-size: 9px;
+    }
+    #mainNav.navbar-shrink .navbar-title {
+        font-size: 32px;
+        margin-bottom: -25px;
+    }
+    #bigPicturesCarousel .padding-pictures {
+        padding-top: 144px;
+    }
+    .col-sm-6 {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+}
+
+.team-member img {
+    width: 225px;
+    height: 225px;
+    border: 7px solid white;
+}
+
+
+
+
