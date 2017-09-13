@@ -45,8 +45,7 @@
         <div ng-bind-html="content"></div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Zamknij</a>
     </div>
 </script>
 
@@ -134,8 +133,7 @@
                     </div>
                     <span><a href="">Komentarze | {{post.commentsCount}}</a></span>
                     <br/>
-                    <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Czytaj
-                        dalej</a>
+                    <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Czytaj dalej</a>
                 </div>
             </div>
             <hr ng-if="!$even"/>
