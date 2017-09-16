@@ -106,6 +106,40 @@ a:hover {
     text-decoration: none;
 }
 
+.modal-title {
+ text-align: center;
+ font-size: 40px;
+ font-weight: normal;
+}
+
+.modal-lg {
+}
+
+.modal-body {
+    text-align: justify;
+    font-size: 15px;
+    text-indent: 60px;
+    line-height: 30px;
+}
+.close-modal .lr {
+    height: 45px;
+    width: 1px;
+    background-color: #222;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    z-index: 1051;
+}
+.close-modal .lr .rl {
+    height: 45px;
+    width: 1px;
+    background-color: #222;
+    transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    z-index: 1052;
+}
+
 @media only screen and (min-width : 420px) {
     #mainNav .navbar-title {
         font-size: 23px;
@@ -154,6 +188,9 @@ a:hover {
 }
 
 @media only screen and (min-width: 992px) {
+    .modal-lg {
+        width: 990px;
+    }
 
     .elements-ordered {
         display: flex;
