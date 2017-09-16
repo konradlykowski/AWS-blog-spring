@@ -80,6 +80,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                   animation: true,
                   templateUrl: 'modal.html',
                   controller: 'ModalInstanceCtrl',
+                  size: 'lg',
                   resolve: {
                     postId: function() {
                       return $stateParams.postId;
