@@ -1,8 +1,16 @@
-var app = angular.module('iglaWPodrozy', ['ngAnimate', 'ngSanitize','ui.router', 'ui.bootstrap', 'ui.bootstrap.modal']);
+var app = angular.module('iglaWPodrozy', ['ngAnimate', 'ngSanitize','ui.router', 'ui.bootstrap', 'ui.bootstrap.modal'])
+.run(function($rootScope, $uibModalStack) {
+
+$rootScope.$on('$routeChangeSuccess', function (newVal, oldVal) {
+
+ alert("CZESC")
+  });
+
+});
+
 
 app.controller('MainController', function($location, $scope) {
     var mainController = this;
-    $scope.$location = $location;
 
 });
 
@@ -20,7 +28,6 @@ app.controller('CarouselController', function ($scope) {
         });
     }
 });
-
 
 app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, postId) {
   $scope.postId = postId+'zecsc';
@@ -48,6 +55,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             templateUrl: 'main.html',
             controller: 'MainController',
         onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+
         }]
 
        })
