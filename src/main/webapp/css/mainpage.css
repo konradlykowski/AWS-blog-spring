@@ -4,9 +4,6 @@ body {
     font-weight: bold;
     letter-spacing: 0.2em;
 }
-#mainNav .container {
-    padding-bottom: 0px;
-}
 #mainNav {
     background-color: rgba(255, 255, 255, 0.9) !important;
 }
@@ -75,7 +72,7 @@ body {
     order: 2;
 }
 
-a.button {
+.button {
     background-color: rgba(252, 239, 238, 2.67) !important;
     display: inline-block;
     border: 1px solid #e6e6e6;
@@ -91,7 +88,7 @@ a.button {
     text-align: center;
 }
 
-a.button span {
+.button span {
     position: absolute;
     top: 0;
     left: 0;
@@ -172,9 +169,6 @@ a:hover {
     .elements-ordered > .element-lower {
         order: initial;
     }
-    #mainNav .container {
-        display: block;
-    }
 
     #mainNav .navbar-title {
         font-size: 45px;
@@ -189,12 +183,14 @@ a:hover {
     }
     #mainNav .navbar-nav {
         width:100%;
+        display: flex;
     }
     #mainNav .navbar-nav .nav-item-left{
         text-align: left;
     }
     #mainNav .navbar-nav .nav-link {
         color:black;
+        padding: 0px;
     }
     #mainNav .navbar-nav  > li {
         width:100%;
