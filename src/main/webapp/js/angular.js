@@ -1,13 +1,12 @@
 var app = angular.module('iglaWPodrozy', ['ngAnimate', 'ngSanitize','ui.router', 'ui.bootstrap', 'ui.bootstrap.modal'])
 .run(function($rootScope, $uibModalStack) {
 
-$rootScope.$on('$routeChangeSuccess', function (newVal, oldVal) {
+$rootScope.$on('$locationChangeStart', function (newVal, oldVal) {
+console.log("Chance")
 
- alert("CZESC")
   });
 
 });
-
 
 app.controller('MainController', function($location, $scope) {
     var mainController = this;
@@ -41,8 +40,9 @@ app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, postId) 
   };
 });
 
-app.config(['$locationProvider', function($locationProvider) {
+app.config(['$locationProvider','$qProvider', function($locationProvider,$qProvider) {
   $locationProvider.hashPrefix('');
+  $qProvider.errorOnUnhandledRejections(false);
 }]);
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -75,8 +75,11 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                   }
                 });
                 modal.result.finally(function() {
-                         $state.go('^'); // activate the parent state when modal is closed or dismissed
+                         $state.go('^');
                        });
-        }]
+        }],
+            onExit: function($uibModalStack){
+                $uibModalStack.dismissAll();
+            }
         })
    })
