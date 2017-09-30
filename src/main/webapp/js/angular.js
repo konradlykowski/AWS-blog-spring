@@ -10,7 +10,6 @@ $rootScope.$on('$locationChangeStart', function (newVal, oldVal) {
 
 app.controller('MainController', function($location, $scope, $stateParams) {
     var mainController = this;
-    console.log($stateParams)
     var j=Math.random()* 20;
     $scope.posts=[]
     for(i=0;i<3;i++) {
@@ -33,10 +32,16 @@ app.controller('CarouselController', function ($scope) {
     }
 });
 
+app
+    .filter('to_trusted', ['$sce', function($sce){
+        return function(text) {
+            return $sce.trustAsHtml(text);
+        };
+    }]);
 
-app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, postId, $interpolate, $sce) {
+app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, postId) {
   $scope.postId = postId+'zecsc';
-  $scope.content = "Japonia to niezwykły kraj z bogatym dobytkiem kulturowym. Wszystko tam było dla mnie niezwykle: ludzie, obyczaje, stroje, język oraz jedzenie. Pomimo pozornego tłoku na ulicach, dworcach oraz w metrze, ludzie są “dziwnie” spokojni. Nigdy dotychczas się z czymś takim nie spotkałam. Pomyślałam, że jako osoba zbzikowana na punkcie mody i kultury ubioru podzielę się z Tobą moimi spostrzeżeniami na ten temat z Japonii. <p/>"+
+  $scope.content = "<div class=\"modal-post-text\">Japonia to niezwykły kraj z bogatym dobytkiem kulturowym. Wszystko tam było dla mnie niezwykle: ludzie, obyczaje, stroje, język oraz jedzenie. Pomimo pozornego tłoku na ulicach, dworcach oraz w metrze, ludzie są “dziwnie” spokojni. Nigdy dotychczas się z czymś takim nie spotkałam. Pomyślałam, że jako osoba zbzikowana na punkcie mody i kultury ubioru podzielę się z Tobą moimi spostrzeżeniami na ten temat z Japonii. <p/>"+
                     "<br/><span class=\"modal-title\">JAPOŃSKA ELEGANCJA NA NAJWYŻSZYM POZIOMIE</span><br/>"+
                     "“Spokój” także panował w strojach japończyków. Dzieci już od najmłodszych lat przyzwyczajane są do ubioru zgodnego z ogólnie przyjętymi zasadami. W szkołach podstawowych zazwyczaj mundurki nie są obowiązkowe, ale bardzo dużo dzieci je nosi. W szkołach średnich to już standard i obowiązek. <p/>Tradycyjny japoński mundurek szkolny dla dziewcząt ma krój stroju marynarskiego i składa się z białej bluzki, plisowanej spódniczki do kolan, trampek i kolanówek. <p/>Chłopięce mundurki są szyte w stylu wojskowym; składają się z białej koszuli z usztywnianym kołnierzykiem i ciemnych spodni. <p/>W Japonii dodatkowo obowiązują mundurki przeznaczone do noszenia na zajęcia wychowania fizycznego. Wszystko to wygląda bardzo estetycznie, nikt się nie wyróżnia i nie rzuca się w oczy. <p/> Dziewczynki wracające ze szkoły wyglądały niesamowicie  w swoich mundurkach, aż sama zatęskniłam za czasami szkolnymi i żałowałam, że nie miałam okazji nosić takiego prawdziwego mundurka. <br/> <br/>"+
                     "Japoński strój do pracy jest bardzo podobny do owych mundurków szkolnych, zawsze stonowany i elegancki. Kobiety noszą białe koszule, pastelowe bluzki, spódnice do kolan lub długie spodnie oraz czułenka na obcasie. Mają dobre i często markowe torebki, które nie rzucają się w oczy. Japonki piękne lśniące włosy i minimalny make up. Wszystko to tworzy bardzo przyjemny dla oka widok. Swoją drogą Japonki bardzo dbają o swój wygląd, widać to już po ilości drogerii i kosmetyków w nich dostępnych. Raj!!! <p/>"+
@@ -52,7 +57,8 @@ app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, postId, 
                     "Udało mi się zakupić jeden rodzaj kimona, ale postanowiłam nosić je na swój własny sposób (KLIK- moja wariacja na temat kimona). <p/>"+
                     "W Japonii kimona noszą też mężczyźni. Mają one stały kształt i wykonane są z tkanin o stonowanych barwach. Odmiennie niż w przypadku kimon damskich rodzaj i rangę uroczystości rozróżnia się poprzez dobór odpowiednich dodatków. <br/> <br/>"+
                     "Na koniec ciekawostka. Kim są owi tytułowi gajdzini? Gajdzin, a właściwie Gaijin to w języku japońskim “cudzoziemiec”, “nie-Japończyk” lub “obcy”, określenie to funkcjonuje w powszechnym użytku."+
-                    "<img ng-src=\"img/IMG_9508.JPG\" style=\"width:100%;\">"+
+                    "</div><img src=\"img/IMG_9508.JPG\" style=\"padding:0px;width:100%;\">"+
+                    "<img src=\"img/IMG_8880.JPG\" style=\"width:100%;\">"+
                     "";
 
   $scope.ok = function() {
