@@ -41,8 +41,7 @@
             <img ng-src="img/IMG_9508.JPG" style="width:100%;">
         </div>
 
-        <div class="modal-post-text" ng-bind-html="content"></div>
-        <img ng-src="img/IMG_8870.JPG" style="width:100%;">
+        <div ng-bind-html="content"></div>
         <div class="modal-footer">
             <a data-toggle="modal" ui-sref="posts()" class="button"><span></span>Zamknij</a>
         </div>
@@ -118,7 +117,7 @@
             <hr ng-if="$even"/>
             <div class="row elements-ordered" ng-if="$even">
                 <div class="col-md-6 element-upper">
-                    <img class="img-responsive" src="{{post.image}}" alt="{{post.image}}">
+                    <img class="img-responsive" ng-src="{{post.image}}" alt="{{post.image}}">
                 </div>
                 <div class="col-md-6 my-auto text-center post-desc element-lower">
                     <div class="line">
@@ -160,7 +159,7 @@
                         dalej</a>
                 </div>
                 <div class="col-md-6 element-upper">
-                    <img class="img-responsive" src="{{post.image}}" alt="{{post.image}}">
+                    <img class="img-responsive" ng-src="{{post.image}}" alt="{{post.image}}">
                 </div>
             </div>
         </div>
