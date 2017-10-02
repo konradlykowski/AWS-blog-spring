@@ -2,6 +2,7 @@ var app = angular.module('iglaWPodrozy', ['ngAnimate', 'ngSanitize','ui.router',
 
 app.controller('MainController', function($location, $scope) {
     var mainController = this;
+    $scope.$location = $location;
 
 });
 
@@ -22,7 +23,7 @@ app.controller('CarouselController', function ($scope) {
 
 
 app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, postId) {
-  $scope.postId = postId;
+  $scope.postId = postId+'zecsc';
 
   $scope.ok = function() {
     console.log(params)
@@ -39,23 +40,23 @@ app.config(['$locationProvider', function($locationProvider) {
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
-        $urlRouterProvider.otherwise('');
+        $urlRouterProvider.otherwise('/posts');
 
        $stateProvider
-       .state('main', {
-        url: '',
+       .state('posts', {
+        url: '/posts',
             templateUrl: 'main.html',
             controller: 'MainController',
         onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
         }]
 
        })
-        .state('showPost', {
-        url: '/posts/:postId',
+        .state('posts.show', {
+        url: '^/posts/:postId',
            templateUrl: 'main.html',
            controller: 'MainController',
         onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-            $uibModal.open({
+            var modal = $uibModal.open({
                   animation: true,
                   templateUrl: 'modal.html',
                   controller: 'ModalInstanceCtrl',
@@ -64,10 +65,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                       return $stateParams.postId;
                     }
                   }
-                }).result.catch(function(res) {
-                      throw res;
-
-                  });
+                });
+                modal.result.finally(function() {
+                         $state.go('^'); // activate the parent state when modal is closed or dismissed
+                       });
         }]
         })
    })
