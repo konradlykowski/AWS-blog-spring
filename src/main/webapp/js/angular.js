@@ -2,15 +2,20 @@ var app = angular.module('iglaWPodrozy', ['ngAnimate', 'ngSanitize','ui.router',
 .run(function($rootScope, $uibModalStack) {
 
 $rootScope.$on('$locationChangeStart', function (newVal, oldVal) {
-console.log("Chance")
+
 
   });
 
 });
 
-app.controller('MainController', function($location, $scope) {
+app.controller('MainController', function($location, $scope, $stateParams) {
     var mainController = this;
-
+    console.log($stateParams)
+    var j=Math.random()* 20;
+    $scope.posts=[]
+    for(i=0;i<3;i++) {
+        $scope.posts.push({id:'marta-w-porto.html', title:'Marta w Porto',category:'podroze',date:Math.random()+'th May 2017', description:'Marta przyjechala do Porto zobaczyc co slychac', content:'CONTENT', commentsCount:'12', tags: 'kokos;kokos2', image:'img/image1.JPG', location: 'Zurich'})
+    }
 });
 
 app.controller('CarouselController', function ($scope) {
@@ -32,7 +37,7 @@ app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, postId) 
   $scope.postId = postId+'zecsc';
 
   $scope.ok = function() {
-    console.log(params)
+
   };
 
   $scope.cancel = function() {
@@ -55,10 +60,19 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             templateUrl: 'main.html',
             controller: 'MainController',
         onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-
+            posts = [{path:'img/image1.JPG',desc:'marta w...'},{path:'img/image3.JPG',desc:'marta w...'},{path:'img/image4.JPG',desc:'marta w...'}]
+            console.log("5")
         }]
-
        })
+       .state('posts.filter', {
+          url: '^/posts/filter/:filter',
+              templateUrl: 'main.html',
+              controller: 'MainController',
+          onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+
+console.log("3")
+          }]
+         })
         .state('posts.show', {
         url: '^/posts/:postId',
            templateUrl: 'main.html',
@@ -76,9 +90,11 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
                 });
                 modal.result.finally(function() {
                          $state.go('^');
+                         console.log("2")
                        });
         }],
             onExit: function($uibModalStack){
+            console.log("1")
                 $uibModalStack.dismissAll();
             }
         })
