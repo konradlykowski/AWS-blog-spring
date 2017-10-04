@@ -25,13 +25,33 @@
 
 <body ng-app="iglaWPodrozy">
 
-<div>
+<script type="text/ng-template" id="modal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+        Demo form submit{{postId}}!:
+        <br/>
+        <form ng-submit="ok()">
+            <div class="input-group animated fadeIn">
+                <input type="text" class="form-control finderBar" ng-model="searchTerm" placeholder="City, State..."
+                       autofocus>
+                <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="ok()">Go22!</button>
+                    </span>
+            </div>
+        </form>
 
-</div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
 
 <script type="text/ng-template" id="main.html">
     <nav id="mainNav" class="navbar navbar-fixed-top">
-
         <div class="container">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarTogglerDemo03">
                 <span class="sr-only">Toggle navigation</span>
@@ -39,7 +59,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-title" href="#">
+            <a class="navbar-title" ui-sref="posts()" ui-sref-opts="{reload: true}">
                 <div>IGŁA <span>W</span> PODRÓŻY
                     <div class="navbar-brand-by-marta">by Marta Nowicka</div>
                 </div>
@@ -47,13 +67,16 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="nav navbar-nav">
                     <li class="nav-item-left">
-                        <a class="nav-link" href="#">IGŁA SZYJE</a>
+                        <a class="nav-link" ui-sref="posts.filter({filter: 'category:szyje'})"
+                           ui-sref-opts="{reload: true}">IGŁA SZYJE</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">IGŁA PODROZUJE</a>
+                        <a class="nav-link" ui-sref="posts.filter({filter: 'category:podrozuje'})"
+                           ui-sref-opts="{reload: true}">IGŁA PODROZUJE</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">IGŁA NOSI</a>
+                        <a class="nav-link" ui-sref="posts.filter({filter: 'category:nosi'})"
+                           ui-sref-opts="{reload: true}">IGŁA NOSI</a>
                     </li>
                     <li>
                         <a class="nav-link" href="#">O MNIE</a>
@@ -89,125 +112,57 @@
     </section>
 
     <section ng-controller='MainController as main' id="blogPostsList" class="container">
-        <hr/>
-        <div class="row elements-ordered">
-            <div class="col-md-6 element-upper">
-                <img class="img-responsive" src="img/image1.JPG" alt="oto Marta">
-            </div>
-            <div class="col-md-6 my-auto text-center post-desc element-lower">
-                <div class="line">
-                    <span>25th May 2017</span>
-                </div>
-                <span><a href="#">Podroze</a></span>
-                <br/><br/>
-                <div class="title">Marta pozdrawia z Porto w Portugalii</div>
 
-                <div class="description">Marta pozdrawia z Porto w PortugaliiMarta pozdrawia z Porto w PortugaliiMarta
-                    pozdrawia z Porto w Portugalii
+        <div ng-repeat="post in posts">
+            <hr ng-if="$even"/>
+            <div class="row elements-ordered" ng-if="$even">
+                <div class="col-md-6 element-upper">
+                    <img class="img-responsive" src="{{post.image}}" alt="{{post.image}}">
                 </div>
-                <br/>
-                <div class="share-icons">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
+                <div class="col-md-6 my-auto text-center post-desc element-lower">
+                    <div class="line">
+                        <span>{{post.date}}</span>
+                    </div>
+                    <span><a href="#">{{post.category}}</a></span>
+                    <br/><br/>
+                    <div class="title">{{post.title}}</div>
+                    <div class="description">{{post.description}}</div>
+                    <br/>
+                    <div class="share-icons">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                    </div>
+                    <span><a href="">Komentarze | {{post.commentsCount}}</a></span>
+                    <br/>
+                    <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Czytaj dalej</a>
                 </div>
-                <span><a data-disqus-identifier="http://garypeppergirl.com/2017/06/in-my-time"
-                         href="http://garypeppergirl.com/2017/06/in-my-time#disqus_thread">Komentarze | 35</a></span>
-                <br/>
-                <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Czytaj
-                    dalej
-                </a>
             </div>
-        </div>
-        <hr/>
-        <div class="row elements-ordered">
-            <div class="col-md-6 my-auto text-center post-desc element-lower">
-                <div class="line">
-                    <span>25th May 2017</span>
-                </div>
-                <span><a href="#">Podroze</a></span>
-                <br/><br/>
-                <div class="title">Marta pozdrawia z Porto w Portugalii</div>
+            <hr ng-if="!$even" />
+            <div class="row elements-ordered" ng-if="!$even">
 
-                <div class="description">Marta pozdrawia z Porto w PortugaliiMarta pozdrawia z Porto w PortugaliiMarta
-                    pozdrawia z Porto w Portugalii
+                <div class="col-md-6 my-auto text-center post-desc element-lower">
+                    <div class="line">
+                        <span>{{post.date}}</span>
+                    </div>
+                    <span><a href="#">{{post.category}}</a></span>
+                    <br/><br/>
+                    <div class="title">{{post.title}}</div>
+                    <div class="description">{{post.description}}</div>
+                    <br/>
+                    <div class="share-icons">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                    </div>
+                    <span><a href="">Komentarze | {{post.commentsCount}}</a></span>
+                    <br/>
+                    <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Czytaj dalej</a>
                 </div>
-                <br/>
-                <div class="share-icons">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                </div>
-                <span><a data-disqus-identifier="http://garypeppergirl.com/2017/06/in-my-time"
-                         href="http://garypeppergirl.com/2017/06/in-my-time#disqus_thread">Komentarze | 35</a></span>
-                <br/>
-                <div data-toggle="modal" ng-click="open('myModalContent.html',1)" href="#posts" class="button">
-                    <span></span>Czytaj
-                    dalej
-                </div>
-            </div>
-            <div class="col-md-6 element-upper">
-                <img class="img-responsive" src="img/image1.JPG" alt="oto Marta">
-            </div>
-        </div>
-        <hr/>
-        <div class="row elements-ordered">
-            <div class="col-md-6 element-upper">
-                <img class="img-responsive" src="img/image1.JPG" alt="oto Marta">
-            </div>
-            <div class="col-md-6 my-auto text-center post-desc element-lower">
-                <div class="line">
-                    <span>25th May 2017</span>
-                </div>
-                <span><a href="#">Podroze</a></span>
-                <br/><br/>
-                <div class="title">Marta pozdrawia z Porto w Portugalii</div>
-
-                <div class="description">Marta pozdrawia z Porto w PortugaliiMarta pozdrawia z Porto w PortugaliiMarta
-                    pozdrawia z Porto w Portugalii
-                </div>
-                <br/>
-                <div class="share-icons">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                </div>
-                <span><a data-disqus-identifier="http://garypeppergirl.com/2017/06/in-my-time"
-                         href="http://garypeppergirl.com/2017/06/in-my-time#disqus_thread">Komentarze | 35</a></span>
-                <br/>
-                <div data-toggle="modal" ng-click="open('myModalContent.html',1)" href="#posts" class="button">
-                    <span></span>Czytaj
-                    dalej
+                <div class="col-md-6 element-upper">
+                    <img class="img-responsive" src="{{post.image}}" alt="{{post.image}}">
                 </div>
             </div>
         </div>
-        <hr/>
-        <div class="row elements-ordered">
-            <div class="col-md-6 my-auto text-center post-desc element-lower">
-                <div class="line">
-                    <span>25th May 2017</span>
-                </div>
-                <span><a href="#">Podroze</a></span>
-                <br/><br/>
-                <div class="title">Marta pozdrawia z Porto w Portugalii</div>
 
-                <div class="description">Marta pozdrawia z Porto w PortugaliiMarta pozdrawia z Porto w PortugaliiMarta
-                    pozdrawia z Porto w Portugalii
-                </div>
-                <br/>
-                <div class="share-icons">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                </div>
-                <span><a data-disqus-identifier="http://garypeppergirl.com/2017/06/in-my-time"
-                         href="http://garypeppergirl.com/2017/06/in-my-time#disqus_thread">Komentarze | 35</a></span>
-                <br/>
-                <div data-toggle="modal" ng-click="open('myModalContent.html',1)" href="#posts" class="button">
-                    <span></span>Czytaj
-                    dalej
-                </div>
-            </div>
-            <div class="col-md-6 element-upper">
-                <img class="img-responsive" src="img/image1.JPG" alt="oto Marta">
-            </div>
-        </div>
 
     </section>
 </script>
