@@ -61,7 +61,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'MainController',
         onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
             posts = [{path:'img/image1.JPG',desc:'marta w...'},{path:'img/image3.JPG',desc:'marta w...'},{path:'img/image4.JPG',desc:'marta w...'}]
-            console.log("5")
         }]
        })
        .state('posts.filter', {
@@ -70,7 +69,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
               controller: 'MainController',
           onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
 
-console.log("3")
           }]
          })
         .state('posts.show', {
@@ -90,11 +88,9 @@ console.log("3")
                 });
                 modal.result.finally(function() {
                          $state.go('^');
-                         console.log("2")
                        });
         }],
             onExit: function($uibModalStack){
-            console.log("1")
                 $uibModalStack.dismissAll();
             }
         })
