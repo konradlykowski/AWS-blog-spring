@@ -27,25 +27,19 @@
 
 <script type="text/ng-template" id="modal.html">
     <div class="modal-header">
-        <h3 class="modal-title">I'm a modal!</h3>
+        <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
     </div>
-    <div class="modal-body">
-        Demo form submit{{postId}}!:
-        <br/>
-        <form ng-submit="ok()">
-            <div class="input-group animated fadeIn">
-                <input type="text" class="form-control finderBar" ng-model="searchTerm" placeholder="City, State..."
-                       autofocus>
-                <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="ok()">Go22!</button>
-                    </span>
-            </div>
-        </form>
-
+    <div class="modal-body" id="modal-body">
+        <ul>
+            <li ng-repeat="item in $ctrl.items">
+                <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ $ctrl.selected.item }}</b>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
     </div>
 </script>
 
@@ -112,7 +106,6 @@
     </section>
 
     <section ng-controller='MainController as main' id="blogPostsList" class="container">
-
         <div ng-repeat="post in posts">
             <hr ng-if="$even"/>
             <div class="row elements-ordered" ng-if="$even">
@@ -134,12 +127,12 @@
                     </div>
                     <span><a href="">Komentarze | {{post.commentsCount}}</a></span>
                     <br/>
-                    <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Czytaj dalej</a>
+                    <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Czytaj
+                        dalej</a>
                 </div>
             </div>
-            <hr ng-if="!$even" />
+            <hr ng-if="!$even"/>
             <div class="row elements-ordered" ng-if="!$even">
-
                 <div class="col-md-6 my-auto text-center post-desc element-lower">
                     <div class="line">
                         <span>{{post.date}}</span>
@@ -155,15 +148,14 @@
                     </div>
                     <span><a href="">Komentarze | {{post.commentsCount}}</a></span>
                     <br/>
-                    <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Czytaj dalej</a>
+                    <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Czytaj
+                        dalej</a>
                 </div>
                 <div class="col-md-6 element-upper">
                     <img class="img-responsive" src="{{post.image}}" alt="{{post.image}}">
                 </div>
             </div>
         </div>
-
-
     </section>
 </script>
 
