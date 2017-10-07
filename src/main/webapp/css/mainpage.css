@@ -110,17 +110,21 @@ a:hover {
  text-align: center;
  font-size: 40px;
  font-weight: normal;
-}
-
-.modal-lg {
+ display: block;
 }
 
 .modal-body {
     text-align: justify;
     font-size: 15px;
-    text-indent: 60px;
     line-height: 30px;
 }
+.modal-footer {
+    padding: 0px;
+    text-align: center;
+    border-top: none;
+}
+
+
 .close-modal .lr {
     height: 45px;
     width: 1px;
