@@ -27,25 +27,25 @@
 
 <script type="text/ng-template" id="modal.html">
     <div class="modal-header">
-        <div class="row">
-            <div class="col-md-11">
-                <div class="modal-title">CO NASZĄ JAPOŃCZYCY I PRAWDZIWI GAJDZINI?</div>
-            </div>
-            <div class="close-modal col-md-1">
-                <div class="lr">
-                    <div class="rl">
+        <div ui-sref="posts()" class="row">
+                <div class="close-modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
-    <img ng-src="img/IMG_9508.JPG" style="width:100%;">
-    </div>
-    <div class="modal-body" id="modal-body">
-        <div ng-bind-html="content"></div>
-    </div>
-    <div class="modal-footer">
-        <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Zamknij</a>
+    <div class="modal-body">
+        <div class="modal-title">CO NASZĄ JAPOŃCZYCY I PRAWDZIWI GAJDZINI?
+            <img ng-src="img/IMG_9508.JPG" style="width:100%;">
+        </div>
+
+        <div class="modal-post-text" ng-bind-html="content"></div>
+        <img ng-src="img/IMG_8870.JPG" style="width:100%;">
+        <div class="modal-footer">
+            <a data-toggle="modal" ui-sref="posts()" class="button"><span></span>Zamknij</a>
+        </div>
     </div>
 </script>
 
@@ -112,6 +112,8 @@
     </section>
 
     <section ng-controller='MainController as main' id="blogPostsList" class="container">
+
+
         <div ng-repeat="post in posts">
             <hr ng-if="$even"/>
             <div class="row elements-ordered" ng-if="$even">
@@ -133,7 +135,8 @@
                     </div>
                     <span><a href="">Komentarze | {{post.commentsCount}}</a></span>
                     <br/>
-                    <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Czytaj dalej</a>
+                    <a data-toggle="modal" ui-sref="posts.show({postId: 'postId'})" class="button"><span></span>Czytaj
+                        dalej</a>
                 </div>
             </div>
             <hr ng-if="!$even"/>
