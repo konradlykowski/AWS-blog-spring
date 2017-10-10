@@ -50,45 +50,38 @@
             <hr/>
             <div>
                 <h4>Dodaj komentarz</h4>
-                <form role="form">
+                <form name="add-comment" ng-submit="addComment()" role="form">
                     <div class="row">
                         <label class="col-xs-2 control-label">E-mail:</label>
                         <div class="col-xs-4">
-                            <input class="form-control" name="email"
+                            <input class="form-control" ng-model="email" name="email"
                                    type="email"
-                                   data-fv-emailaddress-message="Prosze podaj prawidlowy adres e-mail"/>
+                                   data-fv-emailaddress-message="Prosze podaj prawidlowy adres e-mail" required="true"/>
                         </div>
                         <label class="col-xs-1 control-label">Imie:</label>
                         <div class="col-xs-5">
-                            <input class="form-control" name="name"/>
+                            <input class="form-control" ng-model="name" name="name" required="true"/>
                         </div>
                     </div>
                     <br/>
                     <div class="form-group">
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" ng-model="text" name="text" rows="3" maxlength="500"
+                                  required="true"></textarea>
                     </div>
-                    <button type="submit" data-toggle="modal" class="button"><span></span>Opublikuj</button>
+                    <button type="submit" data-toggle="modal" class="button">
+                        <span></span>Opublikuj
+                    </button>
                 </form>
             </div>
             <br/>
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="media-heading">Start Bootstrap
-                        <small>August 25, 2014 at 9:30 PM</small>
-                    </h4>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-                    vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="media-heading">Start Bootstrap
-                        <small>August 25, 2014 at 9:30 PM</small>
-                    </h4>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-                    vulputate fringilla. Donec lacinia congue felis in faucibus.
+            <div ng-repeat="comment in comments">
+                <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">{{comment.name}}
+                            <small>{{comment.date}}</small>
+                        </h4>
+                        {{comment.text}}
+                    </div>
                 </div>
             </div>
         </div>
