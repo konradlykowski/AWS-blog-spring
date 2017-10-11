@@ -192,6 +192,8 @@ a:focus, a:hover {
     padding-top: 12px;
  }
 
+
+
 @media only screen and (min-width : 420px) {
     #mainNav .navbar-padding {
         padding-top: 7px;
