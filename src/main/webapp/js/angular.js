@@ -110,6 +110,10 @@ app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, postId) 
                     "<img src=\"img/IMG_8880.JPG\" style=\"width:100%;\">"+
                     "";
 
+  $scope.comments = [{name:"Konrad",date:"'24.10.1222'<a>asdasd/>",text:"tresc komentarza to jest"},{name:"Konrad",date:"24.10.1222",text:"tresc komentarza to jest"},{name:"Konrad",date:"24.10.1222",text:"tresc komentarza to jest"},{name:"Konrad",date:"24.10.1222",text:"tresc komentarza to jest"}];
+  $scope.addComment = function() {
+    $scope.comments.push({name:$scope.name,text:$scope.text,email:$scope.email, date: new Date().toLocaleString()});
+  }
   $scope.ok = function() {
 
   };
