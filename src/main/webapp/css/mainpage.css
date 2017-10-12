@@ -201,6 +201,23 @@ a:focus, a:hover {
     margin-top: 10px;
 }
 
+.pagination>li>a, .pagination>li>span {
+    padding: 6px 12px;
+    border: none;
+    color: black;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: black;
+    cursor: default;
+    background-color: rgba(252, 239, 238, 2.67) !important;
+    border-color: rgba(252, 239, 238, 2.67) !important;
+}
+
+.modal-dialog {
+    width: 90%;
+}
+
 @media only screen and (min-width : 420px) {
     #mainNav .navbar-padding {
         padding-top: 7px;
@@ -271,10 +288,6 @@ a:focus, a:hover {
 }
 
 @media only screen and (min-width: 992px) {
-    .modal-lg {
-        width: 990px;
-    }
-
     .elements-ordered {
         display: flex;
         flex-direction: initial;
