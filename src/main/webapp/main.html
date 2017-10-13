@@ -115,8 +115,25 @@
         </div>
     </div>
     <div class="text-center">
-        <ul uib-pagination boundary-links="true" total-items="totalItems" ng-change="pageChanged()"
-            ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
-            first-text="&laquo;" last-text="&raquo;"></ul>
+        <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" ng-change="pageChanged()"
+            max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false"></ul>
+    </div>
+</section>
+<section ng-controller="ShowImages as images">
+    <div id="instagram">
+        <div class="row">
+            <div ng-repeat="p in pics | limitTo:-10">
+                <div class="resize">
+                    <img src="{{p.images.low_resolution.url}}"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div ng-repeat="p in pics" ng-if="$index < 10">
+                <div class="resize">
+                    <img src="{{p.images.low_resolution.url}}"/>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
