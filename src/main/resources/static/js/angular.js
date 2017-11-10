@@ -1,16 +1,31 @@
-
-var app = angular.module('iglaWPodrozy', ['ngAnimate', 'ngSanitize','ui.router', 'ui.bootstrap', 'ui.bootstrap.modal'])
-.run(function($rootScope, $uibModalStack) {
-
-
-});
-
-
+var app = angular.module('iglaWPodrozy', ['ngAnimate', 'ngSanitize','ui.router', 'ui.bootstrap', 'ui.bootstrap.modal']);
 
 app.controller('NavBarController', function ($scope) {
   $scope.isNavCollapsed = true;
   $scope.isCollapsed = false;
   $scope.isCollapsedHorizontal = false;
+});
+
+app.service('PostsService', function($http) {
+    this.loadPosts = function(loadedPostsNumber, query, callbackFn) {
+        var req = {
+         method: 'POST',
+         url: 'http://localhost:9200/posts/_search',
+         headers: {
+           'Content-Type': 'application/json'
+         },
+         data: {
+             "from" : loadedPostsNumber, "size" : 7,
+             "query": query,
+             "sort": { "date": { "order": "desc" }}
+         }
+        }
+        $http(req).then(function(response) {
+            return callbackFn(response.data.hits.hits);
+        },
+        function(response){
+        });
+    }
 });
 
 app.config(['$locationProvider','$qProvider', function($locationProvider,$qProvider) {
@@ -19,65 +34,73 @@ app.config(['$locationProvider','$qProvider', function($locationProvider,$qProvi
 }]);
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
-
        $urlRouterProvider.otherwise('/posts/');
-
        $stateProvider
-       .state('posts', {
-        url: '^/posts/',
-            templateUrl: 'main.html',
-            controller: 'MainController',
-            onEnter: ['$stateParams', '$state', '$uibModal', '$http', function($stateParams, $state, $uibModal, $http) {
-
-            }]
-       })
-       .state('posts.filter', {
-          url: '^/posts/filter/:filter',
-              templateUrl: 'main.html',
-              controller: 'MainController'
-         })
-        .state('about', {
-           url: '^/about',
-               templateUrl: 'main.html',
-               controller: 'MainController',
-                 resolve: {
-                               function($stateParams, $state, $uibModal, $rootScope,$transition$) {
-                                           var modal = $uibModal.open({
-                                                animation: true,
-                                                templateUrl: 'about.html',
-                                                controller: 'AboutController',
-                                                size: 'lg',
-                                                resolve: {
-                                                  postId: function() {
-                                                    return $stateParams.postId;
-                                                  }
-                                                 }
-                                              });
-                                              modal.result.finally(function() {
-                                                       $state.go($transition$.from().name,$transition$.params('from'));
-                                                     });
-                              }
-                            },
-
-                   onExit: function($uibModalStack){
-                       $uibModalStack.dismissAll();
-                   }
+       .state('about', {
+           url: '^/about/',
+                resolve: {
+               function($stateParams, $state, $uibModal, $rootScope,$transition$) {
+                                   var modal = $uibModal.open({
+                                        animation: true,
+                                        templateUrl: 'about.html',
+                                        controller: 'AboutController',
+                                        size: 'lg'
+                                      });
+                                      modal.result.finally(function() {
+                                          var result = modal.result.$$state.value;
+                                          if(typeof result != 'undefined' && result.hasOwnProperty('query')) {
+                                              $state.go('posts.search',result);
+                                          } else{
+                                          if($transition$.from().name === '') {
+                                                  $state.go('posts',$transition$.params('from'));
+                                             }else {
+                                                  $state.go($transition$.from().name,$transition$.params('from'));
+                                             }
+                                          }
+                                        });
+                      }
+                    },
+               onExit: function($uibModalStack){
+                   $uibModalStack.dismissAll();
+               }
           })
+       .state('posts', {
+            url: '^/posts/',
+            controller: 'MainController',
+       })
+       .state('posts.search', {
+          url: '^/posts/search/:query',
+          controller: 'MainController',
+         })
         .state('posts.show', {
         url: '^/posts/show/:postId',
-           templateUrl: 'main.html',
-           controller: 'MainController',
            resolve: {
+                    posts: function() { return {id:'marta-w-porto.html', title:'Marta w Porto',category:'podroze',date:Math.random()+'th May 2017', description:'Marta przyjechala do Porto zobaczyc co slychac', content:'CONTENT', commentsCount:'12', tags: 'kokos;kokos2', image:'img/image1.JPG', location: 'Zurich'}},
                     function($stateParams, $state, $uibModal, $rootScope,$transition$) {
                                 var modal = $uibModal.open({
                                      animation: true,
                                      templateUrl: 'show-post.html',
                                      controller: 'ShowPostController',
-                                     size: 'lg'
+                                     size: 'lg',
+                                     resolve: {
+                                       postId: function() {
+                                         return $stateParams.postId;
+                                       }
+                                     }
                                    });
+
                                    modal.result.finally(function() {
-                                            $state.go($transition$.from().name,$transition$.params('from'));
-                                          });
+                                        var result = modal.result.$$state.value;
+                                          if(typeof result != 'undefined' && result.hasOwnProperty('query')) {
+                                              $state.go('posts.search',result);
+                                          } else{
+                                          if($transition$.from().name === '') {
+                                                  $state.go('posts',$transition$.params('from'));
+                                             }else {
+                                                  $state.go($transition$.from().name,$transition$.params('from'));
+                                             }
+                                          }
+                                      });
                    }
                  },
             onExit: function($uibModalStack){
@@ -86,36 +109,27 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         })
    })
 
-app.controller('MainController', function($location, $scope, $stateParams, $http, $state) {
-    var loadPosts = function(pageNumber) {
-        $scope.bigCurrentPage = pageNumber;
-        var req = {
-         method: 'POST',
-         url: 'http://localhost:9200/posts/_search',
-         headers: {
-           'Content-Type': 'application/json'
-         },
-         data: {
-             "from" : (($scope.bigCurrentPage-1)*10), "size" : 10,
-             "query": {"match_all": {}},
-             "sort": { "date": { "order": "desc" }}
-         }
+app.controller('MainController', function($location, $scope, $stateParams, $http, $state, PostsService, $rootScope) {
+    var loadPosts = function(loadedPostsNumber) {
+        var query = {"match_all" : {}};
+        if(typeof $stateParams != 'undefined' && $stateParams.hasOwnProperty('query')) {
+            var json = "{\"match\":" + "{\"" +$stateParams["query"].replace(":","\":\"") +"\"}}"
+            query = JSON.parse(json)
         }
-        $http(req).then(function(response) {
-            $scope.posts = response.data;
-            $scope.bigTotalItems = $scope.posts.hits.total;
-        },
-        function(response){
-
+        PostsService.loadPosts(loadedPostsNumber, query, function(data) {
+        if(data == 0) {
+            $scope.noMorePosts = true;
+        }
+        if(loadedPostsNumber ==0) {
+            $rootScope.posts = [];
+        }
+        Array.prototype.push.apply($rootScope.posts,data);
         });
     }
-    loadPosts(1);
-    $scope.setPage = function (pageNo) {
-      $scope.currentPage = pageNo;
-    };
+    loadPosts($rootScope.loadedPostsNumber=0)
     $scope.pageChanged = function() {
-      //$state.go('posts');
-
+      $scope.loadedPostsNumber = $scope.loadedPostsNumber + 7;
+      loadPosts($scope.loadedPostsNumber);
     };
 });
 
@@ -143,38 +157,8 @@ app.controller('AboutController', function($scope, $uibModalInstance) {
   };
 });
 
- app.factory('InstagramAPI', ['$http','$sce', function($http,$sce) {
-    return {
-      fetchPhotos : function(callback) {
-        var client_id = '';
-        var user_id = '';
-        var access_token = '';
-
-        var endpoint = 'https://api.instagram.com/v1/users/';
-        endpoint += user_id;
-        endpoint += '/media/recent/?';
-        endpoint += '?count=99';
-        endpoint += '&access_token=' + access_token;
-        var trustedUrl = $sce.trustAsResourceUrl(endpoint);
-
-        $http.jsonp(trustedUrl)
-            .then(function (data){
-                callback(data.data.data);
-            }, function(data){
-            });
-      }
-    }
-  }]);
-
-  app.controller('InstagramPicturesController', function($scope, InstagramAPI) {
-
-    InstagramAPI.fetchPhotos(function(data) {
-        $scope.instagramPictures = data;
-    });
-
-  });
-
 app.controller('ShowPostController', function($scope, $uibModalInstance, postId) {
+
   $scope.postId = postId+'zecsc';
   $scope.content = "<div class=\"modal-post-text\">Japonia to niezwykły kraj z bogatym dobytkiem kulturowym. Wszystko tam było dla mnie niezwykle: ludzie, obyczaje, stroje, język oraz jedzenie. Pomimo pozornego tłoku na ulicach, dworcach oraz w metrze, ludzie są “dziwnie” spokojni. Nigdy dotychczas się z czymś takim nie spotkałam. Pomyślałam, że jako osoba zbzikowana na punkcie mody i kultury ubioru podzielę się z Tobą moimi spostrzeżeniami na ten temat z Japonii. <p/>"+
                     "<br/><span class=\"modal-title\">JAPOŃSKA ELEGANCJA NA NAJWYŻSZYM POZIOMIE</span><br/>"+
@@ -201,12 +185,12 @@ app.controller('ShowPostController', function($scope, $uibModalInstance, postId)
   $scope.addComment = function() {
     $scope.comments.push({name:$scope.name,text:$scope.text,email:$scope.email, date: new Date().toLocaleString()});
   }
-  $scope.ok = function() {
-
-  };
 
   $scope.cancel = function() {
-    $uibModalInstance.dismiss('cancel');
+     $uibModalInstance.dismiss('cancel');
+  };
+  $scope.forward = function(state) {
+     $uibModalInstance.dismiss({'query': "tag:"+state});
   };
 });
 
